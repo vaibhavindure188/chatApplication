@@ -5,16 +5,19 @@ import { useContext, useEffect,useState } from "react";
 import { AccountContextData } from "../../context/AccountContext";
 import { getConversation } from "../../components/account/Api";
 // import { Height } from "@mui/icons-material";
-const ChatBox = () =>{
-    const {person,account} = useContext(AccountContextData);
+const ChatBox = ({person}) =>{
+    const {account} = useContext(AccountContextData);
     const [conversation, setConversation] = useState({});
     useEffect(()=>{
         const getConversationDetails = async ()=>{
-          let data =   await getConversation({senderId:account.sub, receiverId: person.sub});
+            let data; 
+            if(account.email === person.email)  data =  await getConversation({senderId:account.email, receiverId: "yourself"});
+            else data =  await getConversation({senderId:account.email, receiverId: person.email})
+          
           setConversation(data);
         }
         getConversationDetails();
-    },[person.sub]);
+    },[person.email]);
     return (<>
         <Box style={{height:'75%'}}>
             <ChatHeader person={person}/>

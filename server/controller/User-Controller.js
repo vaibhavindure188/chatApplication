@@ -10,7 +10,7 @@ export const addUser = async(request, response) =>{
         }
             const newUser = new User(request.body);
             await newUser.save();
-            // console.log(newUser);
+            // console.log(newUser); 
             return response.status(200).json(newUser);
             
     }catch(e)

@@ -4,7 +4,7 @@ export const newConversation = async(request,response) =>{
     try{
         const senderId = request.body.senderId;
         const receiverId = request.body.receiverId;
-        const exist = await conversation.findOne({member:{$all:[receiverId,senderId]}});
+        const exist = await conversation.findOne({member:{$all:[senderId,receiverId]}});
         if(exist){
             return response.status(200).json('conversation already exist');
         }

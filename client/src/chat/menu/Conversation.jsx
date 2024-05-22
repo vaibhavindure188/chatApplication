@@ -26,7 +26,11 @@ const Conversation = ({user}) =>{
    
 const  getUser =  async() =>{
     setPerson(user);
-    await setConversation({senderId:account.sub, receiverId:user.sub});
+    if(account.email === user.email){
+        await setConversation({senderId:account.email, receiverId:"yourself"})
+    }
+    else
+    await setConversation({senderId:account.email, receiverId:user.email});
 
 }
     return(<>

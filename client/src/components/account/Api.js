@@ -14,7 +14,7 @@ export const  addUser = async (data) =>{
 export const getUser = async() =>{
     try{
         let response = await axios.get(`${url}/users`);
-        // console.log(response);
+        console.log(response);
         return response.data;
     }
     catch(e){
@@ -51,9 +51,9 @@ export const newMessage = async(data1)=>{
     }
 }
 
-export const getMessages = async(id)=>{
+export const getMessages = async(idd)=>{
     try{
-            let response = await axios.post(`${url}/message/get`,id);
+            let response = await axios.get(`${url}/message/get/${idd}`); 
             return response.data;
     }
     catch(e){
@@ -61,5 +61,14 @@ export const getMessages = async(id)=>{
     }
 }
 
+
+export const uploadFile = async(data) =>{
+    try{
+        const result = await axios.post(`${url}/file/upload`,data,{headers:{"Content-Type": "multipart/form-data"}})
+        console.log(result);
+    }catch(e){
+        console.log("error while calling uploadFile api ", e);
+    }
+}
 
  
